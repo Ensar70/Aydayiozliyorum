@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Aydam özledim seni</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      .signature {
+        text-align: center;
+        font-size: 1.2em;
+        margin-bottom: 50px; /* 👈 dit zorgt voor extra ruimte onderaan */
+        color: #333;
+      }
+    </style>
+    <style>
+      body {
+        font-family: "Roboto", sans-serif;
+        background: linear-gradient(to bottom, #fff0f5 0%, #fefefe 100%);
+        margin: 0;
+        padding: 0;
+        color: #333;
+      }
+
+      .wrapper {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 40px 20px 100px;
+      }
+
+      .title {
+        text-align: center;
+        font-size: 3rem;
+        font-weight: bold;
+        margin-top: 50px;
+        margin-bottom: 80px;
+        color: #c71585;
+      }
+
+      .section {
+        text-align: center;
+        margin-bottom: 100px;
+      }
+
+      .photo-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 30px;
+        margin-bottom: 20px;
+      }
+
+      .photo-grid img {
+        width: 260px;
+        height: auto;
+        border-radius: 20px;
+        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+
+      .photo-grid img:hover {
+        transform: scale(1.02);
+      }
+
+      .section p {
+        font-style: italic;
+        font-size: 1.2rem;
+        margin-top: 20px;
+        color: #444;
+      }
+
+      .video-section {
+        text-align: center;
+        margin-bottom: 100px;
+      }
+
+      video {
+        width: 90%;
+        max-width: 600px;
+        border-radius: 20px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      }
+
+      .video-text {
+        margin-top: 25px;
+        font-style: italic;
+        font-size: 1.2rem;
+        color: #444;
+      }
+
+      .extra-photos {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+      }
+
+      .extra-photos img {
+        width: 220px;
+        height: auto;
+        border-radius: 20px;
+        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+
+      .extra-photos img:hover {
+        transform: scale(1.02);
+      }
+
+      .final-text {
+        text-align: center;
+        font-weight: bold;
+        font-size: 1.15rem;
+        max-width: 700px;
+        margin: 30px auto 0;
+        color: #444;
+      }
+
+      .reflection-section {
+        position: relative;
+        background-color: #fffafd;
+        padding: 80px 20px;
+        margin-top: 80px;
+        margin-bottom: 80px;
+      }
+
+      .reflection-text {
+        max-width: 850px;
+        margin: 0 auto;
+        font-size: 1.05rem;
+        line-height: 1.7;
+        color: #444;
+        font-style: italic;
+        text-align: center;
+        padding: 40px 30px;
+        background-color: rgba(255, 255, 255, 0.85);
+        border-radius: 25px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        position: relative;
+        z-index: 1;
+      }
+
+      .lily-border {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 120px;
+        background-repeat: no-repeat;
+        background-size: contain;
+        z-index: 0;
+        opacity: 0.35;
+      }
+
+      .lily-border.left {
+        left: 0;
+        background-image: url(lilies/Pink-lilies-90636691_3014x2002_c89314b1-79e8-4c6f-9fdd-75667b96c230_grande.webp);
+        background-position: left center;
+      }
+
+      .lily-border.right {
+        right: 0;
+        background-image: url(lilies/PXL_20220720_212858657-scaled.jpeg);
+        background-position: right center;
+      }
+
+      .signature {
+        text-align: center;
+        font-weight: bold;
+        margin-top: 80px;
+        font-size: 1.15rem;
+      }
+
+      .lily-background {
+        background-image: url(lilies/71AAyAe3bjL.jpg);
+        background-size: cover;
+        background-position: center;
+        opacity: 0.06;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+      }
+
+      audio {
+        display: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- 🎵 Muziek selectie -->
+    <div class="music-selector">
+      <p>burdan şarkını seç</p>
+      <div class="button-row">
+        <button onclick="playSong('sever-beni/sever-beni.mp3')">1</button>
+        <button onclick="playSong('gozlerini-ozledim/Yesilini-ozledim.mp3')">
+          2
+        </button>
+        <button onclick="playSong('sonmedi/Umut-Capone-Sonmedi.mp3')">3</button>
+        <button onclick="playSong('kara-sevda-song/anlatamam.mp3')">4</button>
+        <button onclick="stopSong()">Stop</button>
+      </div>
+      <audio id="audio-player" loop></audio>
+    </div>
+    <style>
+      .music-selector {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        background: rgba(255, 255, 255, 0.8);
+        padding: 12px;
+        border-radius: 16px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        z-index: 999;
+        font-family: sans-serif;
+      }
+
+      .music-selector p {
+        margin: 0 0 8px 0;
+        font-weight: bold;
+        font-size: 14px;
+        text-align: center;
+      }
+
+      .button-row {
+        display: flex;
+        gap: 8px;
+        justify-content: center;
+      }
+
+      .button-row button {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        border: none;
+        background-color: #ffb6c1;
+        cursor: pointer;
+        font-weight: bold;
+        color: white;
+        transition: background-color 0.2s ease;
+      }
+
+      .button-row button:hover {
+        background-color: #ff7f9d;
+      }
+
+      .button-row button:last-child {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+        font-size: 14px;
+      }
+    </style>
+
+    <script>
+      function stopSong() {
+        player.pause();
+        player.currentTime = 0;
+      }
+      const player = document.getElementById("audio-player");
+
+      function playSong(source) {
+        player.src = source;
+        player.volume = 0.3;
+        player.play();
+      }
+    </script>
+
+    <div class="lily-background"></div>
+
+    <div class="wrapper">
+      <!-- 🌹 Grote Titel -->
+      <div class="title">Aydam özledim seni</div>
+
+      <!-- 📸 Foto’s bovenaan -->
+      <div class="section">
+        <div class="photo-grid">
+          <img src="images-ayda/IMG-20250703-WA0039.jpg" alt="Foto 1" />
+          <img src="images-ayda/IMG-20250703-WA0040.jpg" alt="Foto 2" />
+          <img src="images-ayda/IMG-20250703-WA0041.jpg" alt="Foto 3" />
+          <img src="images-ayda/IMG-20250703-WA0042.jpg" alt="Foto 4" />
+        </div>
+        <p>herseyimdin be Ayda, weet je nog de eerste keer zogenaamd leren.</p>
+      </div>
+
+      <!-- 🎥 Video -->
+      <div class="video-section">
+        <video controls>
+          <source src="images-ayda/VID-20250703-WA0005.mp4" type="video/mp4" />
+          Je browser ondersteunt deze video niet.
+        </video>
+        <p class="video-text">Pas na deze dag gercekten asik oldum sana.</p>
+      </div>
+
+      <!-- 💕 Extra foto's -->
+      <div class="section">
+        <div class="extra-photos">
+          <img src="images-ayda/IMG-20250703-WA0043.jpg" alt="Herinnering 1" />
+          <img src="images-ayda/IMG-20250703-WA0044.jpg" alt="Herinnering 2" />
+        </div>
+        <p class="final-text">
+          bunu benim icin yazdiydin, het betekende echt veel voor mij om te zien
+          hoe trots en blij je met me was. (daha hala cuzdanimda)
+        </p>
+      </div>
+
+      <!-- ✨ Reflectietekst -->
+      <div class="reflection-section">
+        <div class="lily-border left"></div>
+        <div class="lily-border right"></div>
+        <div class="reflection-text">
+          <p>
+            Tot de examens ging alles goed en waren we beide blij, eerst was jij
+            erg verliefd en ik minder, maar uiteindelijk bende seni cok sevmeye
+            basladim.<br /><br />
+            Na de examens zei je opeens dat ik gelijk had en het beter is als we
+            niet meer gaan praten, dat vond ik een beetje raar want je vond het
+            altijd moeilijk om niet te praten. Uiteindelijk zei ik oke en zouden
+            we over een paar weken voor het laatst afspreken.<br /><br />
+            De weken voordat we gingen afspreken voor het laatst, liet je me al
+            vaak op afgeleverd en zei je dat je tijd voor jezelf nodig had.
+            Bende bisey diyemedim en ik zei oke. Uiteindelijk gingen we
+            afspreken en ik voelde daar ook dat iets niet helemaal zoals eerst
+            was, want je begon te praten over dat ik niet verdrietig moet zijn
+            als je met iemand anders gaat zijn later. Normalde oyle seylere
+            kizardin maar nu zei je het tegen mij.<br /><br />
+            Je zei ook in de auto waarom doe je zo en pak je me hand niet enz.
+            Ook ging ik de heletijd lachen en dat was echt omdat ik verdrietig
+            was dat je je zo anders gedroeg, en niet net als die ene keer toen
+            we gingen leren bijvoorbeeld. Het voelde dus allemaal niet zo goed.
+            Alsof alleen ik iets wilde en jij niks. Sonra bir ay konusmadik en
+            ik had je echt erg gemist en over alles nagedacht. Of je me nogwel
+            zou willen en of jij wel aan mij dacht. Helaas o son konustugumuz
+            gunde anlattiydin dat je in die maand niet aan me dacht door werk en
+            herkansingen. Dat deed me echt pijn. Bari o aydan once herseyi
+            soyleseydin.<br /><br />
+            En cok acitan sey, was dat je was veranderd. Eskiden Aydam oyle
+            arkadas olarak konusmak istemezdi, beni cok severdi, spammen
+            yapardi, kizardi als ik niet reageerde, droog yapmazdi. Uiteindelijk
+            zag ik dit wel allemaal terug bij je en ik wist genoeg. Beni okadar
+            sevseydin bunun hepsini yapmazdin.
+            <br /><br />
+            Dus voor jou is het beter want beni unutursun ve hayatina devam
+            edersin. benimde kalbimi kirdin ookal bedoelde je het niet zo, want
+            sen oyle degilsin. K had die maand al moeite maar had nog wel hoop.
+            Simdi seni unutmaya calisacam, maar ik weet al dat het me niet gaat
+            lukken. sen beni nasil hemen unuttugunu anlamiyorum vallaha.<br /><br />
+            Mrja, dankjewel aydam. Ztn gormezsin bunu, mr wauw. allahumme barik
+            je was/bent echt mooi. Echt cok yardim ettin met overdenken.
+            Inshallah bulursun wie je wilt, op het juiste moment. Je bent slim
+            en dikkat et, tmm mi askim. Allaha emanet ol, namazlarini kil zoals
+            ik je altijd zei. <br /><br />
+            En oja bunu da soylemek istiyordum sana Aydam, wacht me A knop op
+            toetsenbord is kapot. Tmm ik ben er weer. Ik wilde eigenlijk elke
+            dag een tekst schrijven op deze site en het later aan jou laten
+            zien, maar ik weet niet of ik je nog ooit ga zien of spreken askim.
+            Oja ik wilde je zeggen weet je nog in de vierde vgm, zat je tijdens
+            een toets voor me en ik zei zet je bil recht ayda, en je was
+            helemaal in shock. Ik was toen al simarik, helaas. Bide k wilde je
+            zeggen, je was echt speciaal, jij was niveau te hoog en mooi vr mij
+            altijd drm zei k nooit iets tegen je. Ik zag je altijd praten met me
+            vrienden bijv, en ben konusmazdim zoveel want ik wist dat je me toch
+            nooit zou willen. Uiteindelijk had ik gelijk, want sonunda konusmak
+            istemedin benimle, maar het was wel leuk. Het is nu 01;00,
+            04/07/2025, bijna precies 2 dagen terug heb ik je verwijderd op alle
+            apps. Ergens hoop ik dat je me apped, maar ik weet dat je niet aan
+            mij denkt en waarschijnlijk heel gelukkig bent. Inshallah oyle
+            kalirsin ve allah seni omur boyu yardim eder herseyle. Bitanecik
+            prensesim benim. Hadi optum ja, ik typ al kapot lang. Ztn gormezsin
+            bunu. Big screen de gorursun.
+            <br /><br />
+            Bi evlensekde herseyi yapsak Ayda ya. Niet op die manier, want ik
+            ben ook veranderd, eskiden simariktim heletijd vies, ik wil je gwn
+            naast me hebben en knuffelen. Ik had al leuke dingen in me gedachten
+            om later tedoen. Kijk, ik wilde sws veel bloemen vr je kopen
+            natuurlijk ook lillies. Ook hergun of wnr jij wilt film kijken samen
+            in bed. Want ik weet je houdt van slapen. Ook zouden we bob ross
+            schilderijen maken en in huis ophangen. In onze knusse huisje zoals
+            jij dat leuk vond inrichten yapardik onze huis. Ook bijv elkaar
+            schilderen tijdens het picknicken yapardik. Als je geen zin hebt ik
+            koken cigkofte alirdik beraber en lekker pratend eten. bide tum
+            dunyayi gezerdik, gewoon overal. Ojaa rapunzel bakardik, want die
+            heb ik express niet gekeken om met jou te kijken. Ik kan eigenlijk
+            geen een film kijken nu, voel me niet heel goed eigenlijk. En ik kan
+            gwn geen film kijken. Herseyi beraber bakardik. Beni daha sevseydin.
+            maar maalesef. En beraber namaz kilardik, kuran okurduk. camileri
+            gezerdik, ve bol bol dua ederdik. Om elkaar ook in cennet tezien.
+            Want uiteindelijk is dat het belangrijkste. Bende unutuyorum soms,
+            dat we hier niet zijn voor school of andere dingen. Maar voor allah.
+            Dus ik hoop dat je een man vindt die je kan helpen om dichterbij
+            allah te komen en niet om andere dingen. En oja vallahi billahi
+            basortu sana cok yakisiyordu, inshallah bi gun giyersin voor altijd.
+            Ik vond je zaten altijd mooi, wat je ook droeg of hoe je druit zag.
+            Miss was ik soms streng met kleden bijv, maar vond het niet leuk als
+            mensen naar mijn cutie keken. Want ik weet hoe mooi je bent. Yanlis
+            yaptigim hersey icin hakkini helal et, want ik heb veel fouten
+            gemaakt. Jawel ik heb wel fouten gemaakt, helal et zeg ik. Hadi
+            helal et. Hadi askim bebegim benim. Ik moet je echt proberen te
+            vergeten want echt delircem yoksa. Maar lukt gwn niet. Bide bunu
+            soylim. Ik kan echt niet meer met meisjes praten. Ik weet niet
+            waarom. Niemand trekt me aan, zoals jij dat deed. Ik heb ook van je
+            geleerd dat ik niemand moet vertrouwen, bir ay icinde nasil oyle
+            degistin be. Echt affetmek istiyom seni mr zor iste. Acittin,
+            aglattin erkek adami be cutie. <br /><br />
+
+            Het is nu 08:21, 04/07/2025 ve yeni uyandim. Son zamanlarda word ik
+            vroeg wakker. Bugun seni ruyamda gordum ayda ya. Het leek echt, maar
+            toen ik erachter kwam dat het nep was direct uyandim. okuldaydik met
+            furkan, jij ik en vgm vriendin van jou. Uiteindelijk zouden we nr
+            huis gaan en Furkan vroeg of hij jou nr huis moest brengen, eerst
+            keek hij mij aan en twijfelde of hij het moest vragen, want hij wist
+            natuurlijk wat we hadden met elkaar. Daarna vroeg jij of je mij nr
+            huis moest brengen. vgm zei je sen bugun burdan kendin gitmicen
+            evine, ik zei nog hoeft echt niet dit dat. je zei ben furkani
+            lelylaana birakirim, ondan sonra gezerim met Ensar terwijl ik
+            eigenlijk ook bij lelylaan eruit moest, mr je wilde dus gewoon
+            chillen. Alleen dit was er raar aan mijn droom. Eerst vroeg Furkan
+            of hij iedereen naar huis moest brengen, maar uiteindelijk sen
+            herkezi birakacaktin en wij zouden zelfs chillen. sonunda maalesef
+            uyandim voordat we konden chillen, echt vroeg ook. Biraz daha
+            chillen yapsaydik in me droom guzel olurdu aslinda. Zie je, ik
+            probeer je echt te vergeten, maar ruyama geliyon resmen. Als ik zo
+            nadenk is het wel gay dat ik dit allemaal schrijf, want ztn
+            gormezsin buyuk bi ihtimal, maar jij zou zulke dingen wel leuk
+            vinden en zeggen dat het niet gay maar schattig is. Dus ondan
+            yaziyom herseyi. Seni bi yanagindan opesim geliyor cutiem,
+            natuurlijk yapmam zonder permission en 5 jaar wachten. mrja. Dat
+            vind ik wel echt erg, sen okulu gectin. ben gecemedim en precies na
+            de examens beni terk ettin. Terwijl we elkaar nog hadden geholpen.
+            Helaas ik ben gezakt. Het is echt niet door jou, heel misschien wel.
+            Maar ookal ben ik misschien door jou gezakt, ik vind het echt niet
+            erg. tum dunyam sana feda olsun. Oke dit was wel cringe. Of Gringe
+            zoals jij dat vroeger zei. Deze dagen hergun fikriyle chillen
+            yapiyoz, hij zegt veel dingen die ayda zei heeft Sude ook gezegd.
+            Dus hij heeft gevoeld wat ik nu voel. echt yardim etti bana. Af en
+            toe heb ik nogsteeds hoop, dan zeg ik tegen hem je moet me over paar
+            jaar wingmannen en haar appen. hij zegt komt goed yaparim. Fikri
+            zegt het wordt wel moeilijk dat je terug komt, maar iste ik heb nog
+            hoop. Hij zegt jullie weten nog niet wat jullie willen, en willen
+            daarom niet meer praten en hij heeft gelijk. Maar ozmn niye asik
+            yaptin beni askim. En was jij op het begin ook erg verliefd en
+            gingen we zelfs samen leren, maar opeens dusuncelerin degisti. ve
+            benim dunyam degisti. Ik heb weer veel gepraat, sende biseyler geri
+            yazsaydin askim ya. birazdan cuma namazi var, umarim sende
+            namazlarini kiliyorsundur. Allahim sana herzaman yardim etsin
+            GUZELIM. Sensiz ben napim ya, viezerikje van me. Oja echt laatste
+            ja, sorry dat ik zoveel app. Weet je wat me ook echt veel pijn deed,
+            toen ik je vroeg of je me nu zag als al die andere jongens. Je gaf
+            echt onduidelijk antwoord en zei tuurlijk heb je een andere plek, na
+            wat we allemaal hebben meegemaakt. Je kon gewoon niet aan de
+            toekomst denken en wilde niks beloven zei je. Terwijl ik juist
+            alleen maar denk aan een toekomst met jou. En eskiden toen je echt
+            van me hield twijfelde je ook niet aan mij. Maar bisey vardir ya, of
+            bisey yapmisimdir, sorry. Besef ik kan dit heledag door doen he,
+            maar ik weet niet of je dit gaat lezen, dus bosuna yazmak
+            istemiyorum. tamam hadi ben gidiyorum. Bunu okuyorsan askim, geef ik
+            je nu een kusje op je mooie neus, tamammi. hissettinmi? hadi seni
+            cok seviyorum, uyumadan once hep oyle derdik. Als ik geen iyi
+            geceler zei, hep kizardin dat ik sliep zonder wat te zeggen. Nu
+            appen we helemaal niet meer. En denk je niet eens meer aan mij.
+            Zaman nasil degisti oyle. hadi baybay bebegim benim. <br /><br />
+
+            Is eigenlijk best wel gay dat ik dit schrijf, dus beter hic okuma,
+            bigscreen da gorursun zaten. Me mannelijkheid gaat weg door dit,
+            saka ya anders yazmazdim toch. Maar ik hoop dat je naar niemand laat
+            zien. Ze gaan denken bu nasil bir adam, hoe wilt hij Ayda gaan
+            beschermen. Anne Frank mubarek, en ik zou je beschermen dat weet je
+            zelf ook. hadi, wauw. weet je nog we zouden zogenaamd leren bij OLVG
+            daar, ik pakte je been heletijd. ik vond dat echt leuk trouwens he,
+            dat je in je cozy outfit kwam. met joggingbroek enz. echt
+            bacaklarini tutmak istiyorum. En je hoofd, met 1 hand, zoals ik
+            altijd deed. Ook wil ik je vetkin pakken op me schoot en je hele
+            make up verpesten, want zonder ben je mooier. Tamam echt yeter. ik
+            wil je hand pakken. met je mooie handen. hic gostermedin, je zei
+            altijd dat je vingers lelijk waren. Ik heb ze niet eens normaal
+            kunnen zien, laatstaan kussen. normalde zou ik naar je snap of insta
+            gaan om naar je fotos te kijken, maar dat kan ook niet meer.
+            Gelukkig had ik ss gemaakt van paar fotos van je. onlara bakarim. ja
+            k weet is creepy. maar sende ismimi opzoeken yaptiydin op het begin
+            toen je van me hield. dus ik mag ook. Hadi askim seni cok cok
+            seviyorum kendine iyi bakkk.
+            <br /><br />
+
+            Hallo Ayda, ik moet je eigenlijk vergeten zoals jij mij vergeet,
+            maar ik vind gewoon leuk om dingen te typen naar jou. konusuyoruz
+            gibi oluyor. Het is nu 23:02, 04/07/2025. ik dacht net weer aan die
+            dag dat we zogenaamd gingen leren. Het was leuk en we waren beide
+            echt blij met elkaar. Stel dat ik 18 was, seni gezdirirdim, maar
+            helaas yapamadim ve hic yapamicam. Hadi be, app me gewoon, ozle beni
+            bi kere. Ik weet niet wat ik nog meer moet zeggen. Gewoon ozliyorum
+            seni ve senin icin dualar yapiyorum. met je antenne haartjes die ik
+            de heletijd goed moest zetten. En je mooie handen en neus. bi
+            gorusebilsek te opsem seni op je wang. niet eens opmek, gewoon
+            knuffelen, of gewoon handjes vasthouden. alles beter dan dit. je de
+            heletijd missen. Ik wist nog met je witte Toyota aygo om de hoek bij
+            "mooiste ik", van fatma teyze. ik pakte je hoofd en kon niet geloven
+            dat ik je gewoon vast had. Jij zei nog, als ik normaal mensen zo zag
+            knuffelen vond ik het cringe, maar simdi bizde yapiyoruz. Die dag
+            gaf je me ook een kusje op me wang, hic unutmam onu. met je mooie
+            lippen. ben senin gozlerini yerim bak. Soms denk ik ook domme
+            dingen, zoals stel dat ik in de ziekenhuis kom te liggen of zelfs
+            dood ga, yanima gelirmiydin of uzulurmuydun diye. Bi olsun da gormek
+            istiyorum, sen echt kizardin als ik zulke dingen zei, dus alvast
+            sorry. Maar ik weet nu echt niet hoe je over me denkt. Wil je nog
+            ooit praten, of is het klaar voor altijd. je bent de heletijd zo
+            onduidelijk. als je vanaf de eerste dag dat je droog deed direct zei
+            dat je nooit meer wilde praten en me niet meer leuk vond zou ik het
+            zelfs minder erg vinden dan nu. Nu voelt het gwn alsof ik nog kans
+            heb, want ik heb nog een klein beetje hoop. Maar sen beni vgm echt
+            sildin uit je gedachte. Dusja, ik hoop dat je nog van me houdt. hadi
+            namaz kilacam. <br /><br />
+
+            Het is nu 14:50, 05/07/2025. Ik weet ik praat teveel, mr baska
+            napim. Yeni camiden geldim, simdi namazi kilip chillen yapcam. sende
+            kil namazlarini bak. Aksam ga ik met fikri naar Gym om onze agressie
+            te uiten. app ff ya, kizdirma beni. Ik lijk echt op een hondje, mr
+            ztn gormicen bunu hoop k. Ik dacht vandaag van stel je wilt later
+            weer praten, wat niet gaat gebeuren. Maar wat moet ik dan doen. ik
+            wil echt weer met je praten maar hoe moet ik je vertrouwen na dit.
+            viezerik. hadi na vandaag echt appen yapmicam, tenminste proberen.
+            want k plak teveel kopek gibi. olmadi. Na vandaag yine erkek adam
+            olcam. hadi, dit was laatste keer denk ik, ja?. baybay. Allah seni
+            ve tum muslumanlari yardim etsin, dogru yoldan gotursun ve en
+            hayirlisi kim ise ve ne ise onu versin herkeze inshallah. Ik heb
+            pijn nodig. biri beni dovsun. Ik ga denk ik op vechtsport. bi fena
+            dovsunler beni. Seneye wordt mijn jaar, soylim sana. Ik heb geleerd
+            dat ik niemand kan vertrouwen alleen Allah. Sana herseyi yapardim
+            be. ama ben seni anladim. maalesef olmadi. SEN BENIM KIYMETIMI COK
+            SONRA ANLICAKSIN ASKIM...
+            <br /><br />
+
+            Heyhey Ayda. Het is nu 11:10, 06/07/2025. Ik zou je niet meer appen
+            biliyorum mrja. Ik ga straks naar kapper en even shoppen met papa in
+            middag vgm. Sen napcan bugun? Me site is eigenlijk al af, ik denk nu
+            heletijd wat ik ermee moet doen. sana yollasam is cringe, want stel
+            je denkt bu cocuk napmis bana ik mag hem niet eens. Daarom laat ik
+            em gewoon. en blijf ik door typen. Ik dacht net aan toen we met
+            fikri gingen chillen. met zn drieen. Het was leuk, maar bidaha
+            yapmam. Die dag had je me nog beetje boos gemaakt, maar je zei ik ga
+            nooit meer roken, soz. Yapmissindir simdiye kadar, want je luisterd
+            toch nooit naar mij. Zaten yap als je wilt ben bisey diyemem, maar
+            die dag onumde yaptiydin terwijl ik zei niet doen. Maar affettiydim
+            seni, nasil affetmiyim ki cutie van me. die dag ging fikri nog vape
+            halen, wij zaten toen met zen tweeen in de auto. Dat was de laatste
+            keer dat ik echt liefde voelde van je in het echt. Nadat we je
+            brachten naar huis, want annen aradiydi, zei ik nog tegen fikri,
+            waarom kwam je zo snel van vape halen je moest langer doen zodat ik
+            kon chillen met Ayda. Ook hep elini uzatiyodun van rechts, bende
+            aliyordum elini. Toen ik beetje boos was elini tutmuyordum en je
+            zei, Ensar kizma yaa. Fikri zei ook doe normaal, maar ik voelde me
+            echt gedisrespect. Sonunda affettim canim benim. Aydaaa elke dag
+            begin ik je stem, gezicht en jou te vergeten. Niet vergeten maar ik
+            heb je telang niet gezien en gesproken. Ara beni hadi. Je kan me
+            echt altijd bellen he. Zaten hic aramiyodun. Soms alleen. Oja weet
+            je nog ik belde je, opeens ik hoorde je moeder praten vgm. Ik begon
+            echt te stressen, maar gelukkig kotu bisey demedim dus anlamamistir.
+            Zaten nolcakti we praten toch niet meer. Ik heb je kapot lang niet
+            gezien be. En de dag dat ik je zag bij uitreiking konusmadik en zag
+            ik je alleen van ver. Ik heb echt teveel gepraat en alles uitgelegd.
+            Dus ik ben klaar met typen voor altijd. Ik ga je echt proberen te
+            vergeten. Ojaa ik chill toch met fikri bijna elke dag. Hij zegt soms
+            dingen tegen mij waardoor ik je echt mis, zoals Litch welll. Of
+            letterlijk niett. Maarja. Hadi Allaha emanet ol. Dit was mijn
+            verhaal. Ik hoop dat je je studie leuk gaat vinden en me gaat appen
+            of bellen ooit. Namazlarini kil, kuran oku ve bol bol dualar yap.
+            Als je me nodig hebt ara beni. Seni cok seviyorum askim benim. HIC
+            MI DEMEDIN ICINDEN ONA DA YAZIK DIYE...... <br /><br />
+
+            Heyhey, mis me maar niet. Zaten alismisim. Ik las net die chats
+            terug van vroeger toen we gingen afspreken met fikri. Je was echt
+            lief ya, je zei nog dat ik je beenhaar had aangeraakt en je je heel
+            schuldig voelde dat je me boos had gemaakt. Maar ik zag ook een paar
+            berichten dat je me echt dagen op afgeleverd liet. Eigenlijk moest k
+            daar al begrijpen dat je me niet meer wilde. Ik heb zaten niet veel
+            meer te zeggen. Gewoon ozliyom seni hergun gibi. Het is nu 10:17,
+            07/07/2025. Ik heb echt niks tedoen, bi ara beni de konusalim.
+            sesini ozledim. Ik heb ook een tweede tiktok account waar ik videos
+            over jou repost. Als je deze tekst ooit leest bakarsin naar die
+            account, hoe je me hebt laten voelen. Alle reposts zijn relateble.
+            Account heet 'mo.kh111'. Baska, ik hou nogsteeds van je, guzelim.
+            Sen beni unutursun da, ben seni unutamam bitanem. Neden bunu bana
+            yaptin Ayda.... Ik ga je proberen te vergeten, bunda da bir hayir
+            vardir. Namazlarini echt kil. Teravihte gorusuruz ozmn. Bu senede
+            kildaracam Inshallah, sende gelirsen dinlersin ve arkamda kilarsin.
+            Baska biyerde goremem seni zaten, nerelerde gezdigini bilmiyom ki.
+            Gister middag was ik bij halfweg met me vader, biraz shoppen yaptik
+            daar. En gece om 11 ook met firki, we waren bij die lange weg van
+            Halfweg precies naast je huis, en het begon opeens kapot hard te
+            regenen, we zagen helemaal niks meer. Bijna kaza yapiyoduk,
+            yapsaydik seni arardim. Ik zei nog tegen fikri moet ik Ayda appen
+            yardim etsin. Maar olseydik bile umrunda olmazdi heralde. Laatste
+            tijd hep kotu seyler oluyo gece, alsof er iets ergs gaat gebeuren de
+            komende dagen. Daarom namazlari probeer ik goed te bidden, bisey
+            olursa guzel olelim diye. Inshallah sende benim icin dua
+            yapiyosundur. <br /><br />
+
+            Hallo dit is de laatste keer dat ik hier ga typen voor je, want het
+            is echt klaar. Ik had je net om 01:15, 08/07/2025 geappt of je wilde
+            bellen en je zei nee. En je deed kapot droog. Vallaha het doet me
+            echt veel pijn om je zo te zien. Hoe gedraag je je zo en doe je
+            iemand zoveel pijn terwijl je zogenaamd ooit van me hield. Oyle
+            bisey mi var. Mr doe maar zo, echt goruceksin en ozliceksin later,
+            echt. Hoeveel pijn je me hebt gedaan. Hic beddua felan yapmadim
+            sana, cunku daha hala seviyodum seni. Maar nu denk ik echt rare
+            dingen. Hoe gedraag je je zo. Zeg gwn ga weg uit me leven, inplaats
+            van zo droog en onduidelijk doen, bi bilsen hoeveel pijn je me doet.
+            Hic mi umranda degil hoe het met me gaat. Ik durf je niet eens meer
+            te appen, want na elke bericht doe je steeds droger. Volgensmij echt
+            kiziyon dat ik app heletijd. Maar napim, unutamiyorum. Bi kiz ofzo,
+            bi bagir bana, bi dov beni, bi kufur et, zeg ga weg uit me leven.
+            Dan heb ik een goede reden om je te vergeten en verlaten. Allah bu
+            hissi hic kimseye vermesin wat ik nu voel, echt niet. Na vandaag
+            echt degistin in me ogen. Het is echt klaar, zoals jij wilt, tamam.
+            Hadi veel succes met alles, doe je best. Doei, tot nooit meer. Echt
+            affetmem seni, echt niet. Hoe was het allemaal zo normaal voor je
+            wat we hebben gedaan, dat je niet eens terug denkt of me mist. Hic
+            gelmicektin hayatima, ve ben hic lief yapmicaktim, maar zo ben ik.
+            Bende sana basta droog yapsaydim sen ayni seyi hissedecektin, maar
+            ik vond dat te zielig, kiyamazdim sana, want ik weet hoeveel pijn
+            het iemand kan doen. Senin hic umrunda degilmis benim nasil
+            hissetigimi zo te zien, ama heel goed van je. Napim simdi, ik heb
+            hele site voor je gemaakt, ik had nog hoop. Als jij mij nooit zou
+            appen, dan had ik nooit met een meisje gepraat, zoals het hoort.
+            Maar ik dacht echt jij bent anders dan de andere meiden en we gaan
+            elkaar echt serieus nemen, wat we ook deden. Sonunda bi degistin,
+            niet normaal. Hoe ben je zo veranderd, volgensmij door je
+            vriendinnen. Want je zei tegen me dat ze zeiden tegen je dat je er
+            niet klaar voor bent en mentaal nog te jong bent, maar wie zijn zij.
+            Je moet even dingen zelf kunnen beslissen ipv alles van je
+            vriendinnen te pakken. Want ik zie dat ze je teveel beinvloeden.
+            Allemaal hebben een vriendje. Sende bulursun birisini. Echt
+            ozlersin. Hoop k voor je. Je hebt me echt veel pijn gedaan.
+            <br /><br />
+
+            Hallo, tamam sorry dat ik gister zo boos was. Maar je mag me
+            nogsteeds niet dus ben nog wel beetje boos. Het is nu 23:15,
+            08/07/2025. Yeni den haagdan geldik met vrienden uiteten. Maar
+            ozledim seni yine. Iedereen praat daar over meisjes en dan zit ik
+            daar met jou in me hoofd. Ze doen nog depri muziek op, terwijl k ook
+            depri ben. Gaat echt niet goed. Dur bi namaz kilip geliyom jaa? Ik
+            had vandaag nieuwe haarstijl voor het eerst. Begendin mi? gormedin
+            tabi, umrunda degil cunki. hadi wacht beetje. Oja ayda, dit kwam in
+            me op. Bizim babalar hebben vaak etentje in Laila Den Haag, want we
+            kennen die baas. Per jaar bi kac kez gidiyoz met vaders en paar
+            gencler om te eten en praten. De vorige keer toen we naar Laila
+            gingen met gencler, was een paar maanden terug. Toen waren wij nieuw
+            begonnen met praten. Ik weet nog jij vroeg heb je rozen gekregen
+            voor valentijnsdag. Die dag ging ik nog in reuzenrad en ik appte je
+            van helemaal boven, ik wilde nog video sturen maar was bang. Ik
+            dacht je gaat raar vinden, want was echt begin van praten. Nu
+            uiteindelijk ongeveer 5 maanden later zijn we weer Laila gegaan.
+            Maar dit keer zonder jou. Helaas. In middag zag ik op tiktok mannen
+            die piano speelde, was wel vet, dus ik oefende ook beetje. Is wel
+            makkelijk, ik dacht nog Ayda bunu duysaydi echt sevinirdi. Maar hic
+            duymican bisey. Mooierd. Nasil kizim ki sana. Maar je doet wel erg
+            ya. Vallaha voel me ni heel goed. Heletijd lijkt alsof ik moet
+            huilen, maar lukt niet. Niet perse over jou maar gewoon algemeen.
+            Net Batuhanla gorustuk, yarin sabah Turkiyeye gidiyomus. Ik werd
+            gewoon emotioneel, niet huilen, maar doet me gewoon pijn. Eskiden
+            boyle degildi. Sen benim kalbimi kirdiktan sonra oyle oldum. Bide ik
+            zei tegen jongens dat ik site voor je heb gemaakt. Ze zeiden doe
+            meer liedjes erbij. Misschien dinlemek ister, dus biraz daha sarki
+            eklim voor jou. Tamam mi. Je maakt me gek. Besef ik weet je kenteken
+            uit me hoofd. Ik heb shi fotografisch geheugen. Allahumaah barik de.
+            Besef na gister hic bisey yazmadin. Gesprek gewoon bitti met nee ik
+            kan niet bellen. Maarja. Bisey vardir. Het is nu 01:26. Het duurde
+            beetje lang, maar bi kac tane sarki ekledim met een stop knop
+            ernaast. Ama yoruldum dus ga morgen wel verder, tamam mi. Ik wil ook
+            nog een spelletje maken, voor fikri ooit. Dus bi bakalim. Cok
+            kizdirdin beni, maar kijk wat ik allemaal voor je doe. Herseyimsin
+            de ondan. Sen unut beni, kalbimi kir. Bide aramiyon he. Echt erg ben
+            je. Hadi ik ga nog beetje uzanmak. baybay. <br /><br />
+
+            Hallo, iyimisin. Ik hoop dat je het leuk hebt. Dun aklima bisey
+            geldiydi, dus anlatmak istiyodum. Het is nu trouwens 12:17,
+            10/07/2025. Ik begin beetje hoop te verliezen. Heralde yazmican,
+            maar ik dacht net ook. Yazsaydin bile, zou ik misschien ook droog
+            doen. Want ja, oyle affetmekle olmuyo bu is. Tamam ik dacht gister
+            dus aan dit. Ik weet nog in 5de of 6de vgm, gingen we voor
+            geschiedenis naar dam. We waren dus met hele klas en moesten meester
+            volgen. Omid en ik zagen vgm een vomar of dirk en we gingen naar
+            binnen om drinken te halen, en hadden dus de klas verlaten. We waren
+            binnen en we zagen opeen jou en sidelya ook binnen. Toen Omid en ik
+            uit winkel gingen, waren we de klas helemaal kwijt. We gingen
+            rondjes maken en overal kijken. Daarna keek ik goed in een straat en
+            zag ik jou ons roepen, met 'de klas is hier kom!'. Ik vond dat echt
+            lief van je, helemaal bizi beklemistin, zodat we niet verdwaald
+            werden. Je ging nog lachen dat ik 1,5 liter fles had gehaald, die
+            mochten we ook niet meenemen naar binnen in die hof, dus ik had em
+            verstopt in me buik. Je ging nog helemaal lachen. Daar gingen we ook
+            beetje praten met elkaar. Leuke tijden. Echt ozlicem middelbare
+            school. Maar ik moet nog een jaar. shit. Seneye kom ik ook VU,
+            soylim sana. Wordt kapot cringe, mrja. Ben konusmam seninle, na wat
+            je allemaal hebt gedaan. Maar sen bana gelirsen bakariz. Konusuruz
+            biraz, maar vgm wil je dat ook niet. Dus we doen wel alsof we elkaar
+            niet kennen. Komt goed. <br /><br />
+
+            Selamun aleykum Ayda, het is nu 21:09, 11/07/2025. Dankjewel voor
+            alles. Ik heb echt veel gedacht over ons. Maar we wisten beide dat
+            het slecht was wat we deden. Allah seni imtihan olarak hayatima
+            koymus, ve bende hata yapmisim door te gaan praten met je. Allahta
+            beni cezalandirmis, op een hele erge manier. Want ik voelde me echt
+            heel slecht. Bu cezadan sonra cok seyler ogrendim. Ik ga niet meer
+            met meisjes praten, want ik vertrouw ze echt niet, ookal zijn ze zo
+            mooi en aardig als jij. Ik vertrouw niemand en ga focussen op me
+            zelf. Zogenaamd beraber yapmistik examensi falan, opeens gitti
+            herkez die het hebben gehaald. Sanki beraber hic bisey yapmadik
+            gibi. Dus bakacam seneye, hoe het gaat zijn. Ik ga wel veel alleen
+            zijn wat niet heel goed is voor mij, want dan ga ik veel nadenken.
+            Maar namazlarimi kildigim surece Allah yardim eder Inshallah.
+            Senide. Ik praat nog dagelijk over je met vrienden, denk nog
+            dagelijk aan je, en zie nog dagelijks je fotos, dus echt unutamadim.
+            Maar napim. Ik ga en moet je wel vergeten, hoeveel ik ook van je heb
+            gehouden. Daha yeni De Haan jaarboeklari verdi bana. Ik zag weer
+            allemaal fotos van je. Mooierd. Hoeveel pijn je me ook hebt gedaan
+            en doet. Vallahi billahi ik hoop het beste voor je. Allah senin
+            yuzunu nurlandirsin, dualarini kabul etsin, en hayirlisi kim ve ne
+            ise onu versin Inshallah. Sen en iyisini yaptin. Mij verlaten zodat
+            we beide geen zina meer verrichten. Dankjewel. Maar het hoefde niet
+            op deze harde manier. Maarja. Ik dacht vandaag nog aan Berlijn en
+            Koln kamp. Stel dat ik toen met je praatte, dan waren we gewoon met
+            ze tweeen in het buitenland op een step in de nacht. Besef wat we
+            allemaal konden doen. Echt gezerdik. Maar toen wilde je me niet. Nu
+            ook niet. Maar je mocht me wel ooit vgm. Hadi Ayda. Allaha emanet
+            ol. <br /><br />
+
+            Hallo Ayda. Het is nu 23:15, 12/07/2025. Yeni namazi kildim, want
+            was buiten met schoolvrienden. Het was echt gezellig. We gingen
+            barbecuen en hadden een ijsje gegeten. Ik had ze ook allemaal
+            verteld over jou, want het ging er gwn opeens over. Zaten herkez
+            biliyodu alleen Omid niet iste. Onada iste soylediydim dat we goed
+            waren enz mr nu niet meer praten. Hij zei zo cute dit dat. Hoezo
+            praten jullie niet meer. Bende anlattim iste, dat je niet meer wilde
+            en geloof enz. Hij zei app dr gewoon weer. Maar ik zei echt yapmam
+            bidaha, want ze reageerde echt droog. Hij zei ze wilt je zoiezo nog,
+            maar ik zei nee helaas. Napim. Yarin moet ik even alleen naar stad
+            om iets terug te brengen. Ik weet echt niet wat jij doet, izine
+            gittin mi yada daha burdamisin. Umarim iyisindir. Keyfine bak, zaten
+            bakiyorsundur. Ik ga ook over paar dagen, arabayla turkiyeye. Je zou
+            me nog helpen met goeie plekken om te verblijven. Yolun ustunde.
+            Maar onlarida bosver. Zo had je me geregeld, weet je nog. Yardim
+            ettigin seyi bile beraber yasayamadik. Inshallah tatilin iyi
+            geciyodur. Daha appen yaparim voordat ik ga naar Turkije. Tamam mi.
+            Sorry als ik iets ergs heb gezegd over je in deze tekst. Ik hou nog
+            van je, echt. Unutma onu. Ookal hou jij niet van mij. boeit me niet.
+            <br /><br />
+
+            Hallo Ayda, het is nu 10:16, 15/07/2025. Bugun aksam biz arabayla
+            Turkiyeye gidiyoruz. Dus laatste keer dat ik app. Belki tatilden
+            sonra typen yapmam bidaha, dan is dit het einde van mijn tekst. Als
+            ik heel eerlijk ben, biraz unutmaya basliyodum seni. Unutmak
+            degilde, opgeven yaptiydim. Maar gister waren we met de jongens in
+            avond buiten. Allemaal depri. Moest k weer denken. En ik zag onze
+            chats, je zei seni ozliyorum enz. En nu opeens niet. Aksamlari door
+            me depri tiktoks word k ook depri. Maar in de dag probeer k beetje
+            te vergeten en niet teveel aan je te denken. Gister met die boys
+            hadden we het er nog over. Als we niks doen in onze dag gaan we
+            teveel nadenken wat niet goed is. Dus onlar filmlere bakiyolar ve
+            oyunlar fln oynuyorlarmis om dus niet te niksen. Maar mijn probleem
+            is, ik kan geen films kijken en ook geen spel spelen. Ik wil wel,
+            maar olmuyo. Dus daarom doe k vaak niks en denk k iste na. Maar is
+            soms ook goed. Tatilden sonra ga ik proberen me planning vol te
+            plannen. School, Cami, Gym, Vechtsport, Werk, en sites maken dus
+            voor me zelf dingen. Zo ga ik proberen weinig te denken aan jou, en
+            weinig te niksen zodat ik niet teveel nadenk, want echt deliririm
+            yoksa. Sen bosver beni zaten, nasil hissettigimi yada neler yaptigim
+            da umrunda degil. Bende seni oyle unutabilseydim, oghh. mis gibi.
+            Hadi Ayda. App maar niet. Ozlersin bak, ben oyle kolay geri donmem.
+            Soylim sana. Mooierd. Canimin ici. Viezerik. Laat me maar zo voelen.
+            Ik hoop dat jij tenminste blij bent, zonder mij. Alvast veel succes
+            met school. Namazlarini kil. Tamam mi, soz verdin bana. Ookal ga ik
+            je misschien nooit meer zien, kendine iyi bak. cugara icme, namazini
+            kil, kuran oku, odevini yap, oglanlarla konusma, yemegini ye, yuzunu
+            elleme, dus niet krappen. Tamam mi. Hadi son kez diyecem. Seni cok
+            seviyorum Ayda. Kendine iyi bak. Allaha emanet ol.
+          </p>
+        </div>
+      </div>
+
+      <!-- random piccas van ayda op me telefoon -->
+      <p class="final-text">
+        Dit zijn alle foto's van je die ik in me galerij kon vinden.
+      </p>
+    </div>
+    <div class="section">
+      <div class="photo-grid">
+        <img src="random ayda pics/random ay in klas.jpg" alt="Foto 1" />
+        <img src="random ayda pics/random ay metro.jpg" alt="Foto 2" />
+        <img src="random ayda pics/random ay tiktok.jpg" alt="Foto 3" />
+        <img src="random ayda pics/Ayda duimpje in klas.jpg" alt="foto 4" />
+      </div>
+    </div>
+
+    <!-- picca van mij met filter ayda -->
+    <div class="section">
+      <div class="extra-photos">
+        <img
+          src="ensar met ayda filter/ensar met ayda filter.jpg"
+          alt="ensar met ayda filter"
+        />
+      </div>
+      <p>
+        Besef deze foto had ik in de vierde gemaakt. Ik weet is misschien niet
+        je beste foto, mrja. Vr mij was je altijd mooi.
+      </p>
+    </div>
+
+    <!-- 💌 Afsluiting -->
+    <div class="signature">
+      @ensar.o70 and @aydayyz <br />
+      Ik hou nog steeds van je, ookal heb je me veel pijn gedaan.🌹
+    </div>
+  </body>
+</html>
